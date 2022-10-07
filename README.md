@@ -109,11 +109,12 @@ data/refined_data.
 
 ### 2. Build RE and MSETS-TL models
 
-The script system.py takes the refined data, standardises it and splits it into
-training, validation and testing data. It then uses this data to build the RE and
-MSETS-TL models before applying them to the test data. The results of the test
-data predictions and validation MAE are then saved as a series of pandas dataframes
-in data/results/raw_outputs.
+The script system.py contains the functions that takes the refined data, standardises 
+it and splits it into training, validation and testing data. It then uses this data to 
+build the RE and MSETS-TL models before applying them to the test data. The results 
+of the test data predictions and validation MAE are then saved as a series of pandas 
+dataframes in data/results/raw_outputs. The script build_eps_predictions.py will execute
+these functions.
 
 ### 3. Summarise the test data predictions
 

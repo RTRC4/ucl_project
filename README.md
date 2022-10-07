@@ -16,14 +16,13 @@ This package is used to build a predictive system for nowcasting the quarterly
 reported company EPS. 
 
 Target data
-The target data is the quarterly reported EPS for the stocks of the S&P 500. The
-data runs from the beginning of . For each when building predictions, the stocks
-are first tested for stationarity. The 12 month difference is calculated, as well
-as the 12 month percentage change. Both changes are tested for stationarity using
-the Augmented Dickey-Fuller test. If neither changes are stationary, the target is
-discarded. If only one change is stationary, the stationary change is used when
-modelling. If both changes are stationary, the least volatile change is used when
-modelling.
+The target data is the quarterly reported EPS for the stocks of the S&P 500. For 
+each target when building predictions, the stocks are first tested for stationarity. 
+The 12 month difference is calculated, as well as the 12 month percentage change. 
+Both changes are tested for stationarity using the Augmented Dickey-Fuller test. 
+If neither changes are stationary, the target is discarded. If only one change is 
+stationary, the stationary change is used when modelling. If both changes are 
+stationary, the least volatile change is used when modelling.
 
 Features
 A high-dimensional feature space consisting of IBES consensus estimates, stock
@@ -39,12 +38,15 @@ the target and feature data is standardised.
 
 Training period and moving window
 For each quarter, a twenty year moving window is used to build the models and make 
-the predictions. Predictions are also built for each month of the quarter. For 
-instance, suppose you wish to nowcast the quarterly reported EPS for the stocks of 
-the S&P 500 for Q1 2020. The twenty years worth of data preceding January 2020 
-would be used as the training data while the data for January, February, and March 
-2020 would be used as the testing data. The training data would be split with the 
-first 80% used as training data while the final 20% would be used as validation.
+the predictions. Predictions are also built for each month of the quarter. The
+predictions for the first, second and third month of the quarter are defined as the
+M1, M2, and M3 predictions respectively. For instance, suppose you wish to nowcast 
+the quarterly reported EPS for the stocks of the S&P 500 for Q1 2020. The twenty 
+years worth of data preceding January 2020 would be used as the training data while 
+the data for January, February, and March 2020 would be used as the testing data. 
+The training data would be split with the first 80% used as training data while the 
+final 20% would be used as validation. Predictions would then be made at the end of
+January (M1), end of February (M2), and end of March (M3).
 
 Feature screening
 Given the high dimensionality of the feature space, an efficient feature screening

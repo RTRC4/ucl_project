@@ -12,10 +12,12 @@ To install required packages, to current (virtual) environment, use
 ### Overview
 
 Objective
+
 This package is used to build a predictive system for nowcasting the quarterly
 reported company EPS. 
 
 Target data
+
 The target data is the quarterly reported EPS for the stocks of the S&P 500. For 
 each target when building predictions, the stocks are first tested for stationarity. 
 The 12 month difference is calculated, as well as the 12 month percentage change. 
@@ -25,6 +27,7 @@ stationary, the stationary change is used when modelling. If both changes are
 stationary, the least volatile change is used when modelling.
 
 Features
+
 A high-dimensional feature space consisting of IBES consensus estimates, stock
 prices, and various economic and financial indices. Each raw time series is used
 to create 4 series by finding the 12 month difference, 12 month percentage change,
@@ -33,10 +36,12 @@ change of the 3 month moving average. The original raw data is removed while the
 transformed series are kept as the feature space.
 
 Frequency of data and transformations
+
 All data is converted to monthly series, if not monthly already. When modelling,
 the target and feature data is standardised.
 
 Training period and moving window
+
 For each quarter, a twenty year moving window is used to build the models and make 
 the predictions. Predictions are also built for each month of the quarter. The
 predictions for the first, second and third month of the quarter are defined as the
@@ -49,6 +54,7 @@ final 20% would be used as validation. Predictions would then be made at the end
 January (M1), end of February (M2), and end of March (M3).
 
 Feature screening
+
 Given the high dimensionality of the feature space, an efficient feature screening
 method is employed whenever modelling a given target. The Spearmans rank correlation
 is calculated between the target series and feature. Those with an absolute correlation
@@ -57,12 +63,14 @@ removed, leaving just the features that are relatively independent among themsel
 and show some relationship with the target. 
 
 Modelling the stocks
+
 When making predictions, the stocks are first split between those with a long enough
 time series history to be able to model directly and those that are too short to
 model directly. Those deemed too short are the ones with only ten years worth of
 data. 
 
 RE method
+
 Those with more than ten years worth of data are modelled using a neural network
 ensemble modelling technique proposed in this thesis called the Randomised Ensemble
 (RE) method. Block bootstrapping is applied to build 500 permutations of the data.
@@ -72,6 +80,7 @@ are then built, a modified version of forward stepwise selection is used to comb
 the best models into the final ensemble. 
 
 MSETS-TL method
+
 Stocks with less than ten years worth of data are modelled using a time-dynamic,
 multi-source transfer learning technique proposed in this thesis called the
 Multi-Source Ensemble Time Series Transfer Learning (MSETS-TL) method. For this 
